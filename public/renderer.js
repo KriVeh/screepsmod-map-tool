@@ -210,7 +210,12 @@ function editTerrain(room, x, y, type) {
   const map = ['plain', 'wall', 'swamp']
   type = map.indexOf(type)
   const r = terrain.find(r => r.room === room)
-  const ind = x + (y * 50)
+  if(room.match(/^(W)(\d+)(\w)(\d+)$/)) {
+	  var _ind = x + ((y + 1) * 50)
+  } else {
+	  var _ind = x + (y * 50)
+  }
+  const ind = _ind
   const part1 = r.terrain.slice(0, ind)
   const part2 = r.terrain.slice(ind + 1)
   r.terrain = terrainCache[room].terrain = part1 + type + part2
